@@ -3,30 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSEvents | Агрегатор мероприятий</title>
+    <title>HSEvents</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
-        <div class="logo">HSEvents 🎓</div>
-        <nav class="nav">
-            <a href="#" id="loginBtn">Войти</a>
-        </nav>
+        <div class="logo">Лицей НИУ ВШЭ</div>
+        <button id="loginBtn">Войти</button>
     </header>
 
     <main class="main-content">
         <section class="calendar-section">
-            <h2>Календарь</h2>
-            <div id="calendar-container">
-                <!-- Сюда с помощью JS добавим интерактивный календарь -->
+            <div class="calendar-header-controls">
+                <button id="prevMonthBtn" class="month-nav-btn">&lt;</button>
+                <h2 id="calendar-month-title">Календарь</h2>
+                <button id="nextMonthBtn" class="month-nav-btn">&gt;</button>
             </div>
+            <div id="calendar-container"></div>
         </section>
 
         <section class="events-section">
             <h2>Ближайшие мероприятия</h2>
+            <!-- Блок фильтров -->
+            <div class="filters-container">
+                <button class="filter-btn active" data-building="all">Все</button>
+                <button class="filter-btn" data-building="Солянка">Солянка</button>
+                <button class="filter-btn" data-building="Ляля">Ляля</button>
+                <button class="filter-btn" data-building="Трифон">Трифон</button>
+                <button class="filter-btn" data-building="Колобок">Колобок</button>
+            </div>
             <div id="events-list">
-                <!-- Карточки мероприятий будут загружаться сервером сюда -->
-                <p>Загрузка мероприятий...</p>
+                <p style="color: #8e8e93;">Загрузка мероприятий...</p>
+            </div>
+        </section>
+
+        <section class="events-section" id="my-events-section" style="display: none; margin-top: 40px;">
+            <h2>Мои записи</h2>
+            <div id="my-events-list"></div>
+        </section>
+
+        <section class="admin-section" id="admin-section" style="display: none; margin-top: 40px;">
+            <h2 style="color: var(--lyceum-yellow);">Панель администратора</h2>
+            <div class="admin-card">
+                <input type="text" id="admin-title" placeholder="Название мероприятия (например: Лекция по IT)" class="admin-input">
+                <input type="number" id="admin-capacity" placeholder="Количество мест (например: 30)" class="admin-input">
+                <input type="date" id="admin-date" class="admin-input">
+                <select id="admin-building" class="admin-input">
+                    <option value="Солянка">Солянка</option>
+                    <option value="Ляля">Ляля</option>
+                    <option value="Трифон">Трифон</option>
+                    <option value="Колобок">Колобок</option>
+                </select>
+                <button class="btn-primary" onclick="submitNewEvent()">Создать мероприятие</button>
             </div>
         </section>
     </main>
