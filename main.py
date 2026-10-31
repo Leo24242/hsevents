@@ -124,3 +124,11 @@ def cancel_enrollment(req: CancelRequest, db: Session = Depends(get_db)):
     db.delete(enrollment)
     db.commit()
     return {"message": "Запись успешно отменена"}
+@app.delete("/events/{event_id}")
+def delete_event(event_id: int, db: Session = Depends(get_db)):
+    event = db.query(database.Event).filter(database.Event.id == event_id).first()
+    if not event:
+        raise HTTPException(status_code=404, detail="Мероприятие не найдено")
+    db.delete(event)
+    db.commit()
+    return {"message": "Успешно удалено"}
